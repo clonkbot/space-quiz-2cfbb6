@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --amber: #ffb000;
+  --amber-dim: #cc8c00;
+  --amber-glow: rgba(255, 176, 0, 0.3);
+  --green: #00ff41;
+  --green-glow: rgba(0, 255, 65, 0.3);
+  --red: #ff3e3e;
+  --red-glow: rgba(255, 62, 62, 0.3);
+  --space-black: #0a0a0a;
+  --phosphor: #1a1a0a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--space-black);
+  color: var(--amber);
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.bg-space-black {
+  background-color: var(--space-black);
+}
+
+.text-amber {
+  color: var(--amber);
+}
+
+.text-green {
+  color: var(--green);
+}
+
+.text-red {
+  color: var(--red);
+}
+
+.border-amber {
+  border-color: var(--amber);
+}
+
+.border-green {
+  border-color: var(--green);
+}
+
+.border-red {
+  border-color: var(--red);
+}
+
+.bg-amber {
+  background-color: var(--amber);
+}
+
+.glow-amber {
+  box-shadow: 0 0 10px var(--amber-glow), 0 0 20px var(--amber-glow), inset 0 0 10px var(--amber-glow);
+}
+
+.glow-green {
+  box-shadow: 0 0 10px var(--green-glow), 0 0 20px var(--green-glow), inset 0 0 10px var(--green-glow);
+}
+
+.glow-red {
+  box-shadow: 0 0 10px var(--red-glow), 0 0 20px var(--red-glow), inset 0 0 10px var(--red-glow);
+}
+
+.text-glow-amber {
+  text-shadow: 0 0 10px var(--amber), 0 0 20px var(--amber-glow), 0 0 30px var(--amber-glow);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px var(--green), 0 0 20px var(--green-glow);
+}
+
+.text-glow-red {
+  text-shadow: 0 0 10px var(--red), 0 0 20px var(--red-glow);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--amber-glow), 0 0 20px var(--amber-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--amber-glow), 0 0 40px var(--amber-glow), 0 0 60px var(--amber-glow);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.animate-flicker {
+  animation: flicker 4s infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.crt-frame {
+  border: 3px solid var(--amber);
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 26, 10, 0.9) 0%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+  position: relative;
+}
+
+.crt-frame::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(255, 176, 0, 0.2);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.terminal-header {
+  background: linear-gradient(90deg, var(--amber) 0%, var(--amber-dim) 100%);
+  color: var(--space-black);
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.option-button {
+  border: 2px solid var(--amber);
+  background: transparent;
+  color: var(--amber);
+  padding: 1rem 1.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+
+.option-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--amber);
+  transition: width 0.15s ease;
+  z-index: -1;
+}
+
+.option-button:hover:not(:disabled)::before {
+  width: 100%;
+}
+
+.option-button:hover:not(:disabled) {
+  color: var(--space-black);
+}
+
+.option-button:disabled {
+  cursor: not-allowed;
+}
+
+.option-button.correct {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(0, 255, 65, 0.1);
+}
+
+.option-button.incorrect {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(255, 62, 62, 0.1);
+}
+
+.progress-bar {
+  height: 4px;
+  background: rgba(255, 176, 0, 0.2);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--amber);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--amber);
+}
+
+.score-display {
+  font-family: 'Space Mono', monospace;
+  font-size: 4rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .score-display {
+    font-size: 3rem;
+  }
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
